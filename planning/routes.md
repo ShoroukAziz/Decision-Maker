@@ -1,6 +1,14 @@
+- GET   /polls                 => Admin panel if you're logged in
+- GET   /polls/new             => Gets the create poll form
+- POST  /polls                 => Creates a new poll
+- GET   /polls/:id/results     => The poll results
+- PATCH /polls/:id/complete    => Completes the poll
 
-- GET  /                => Admin panel if you're logged in
-- GET  /poll/:id        => The poll results
-- POST /poll            => Creates a new poll
-- POST /poll/:id/vote   => Votes on a poll
-- PATCH /poll/:id       => Completes the poll
+- GET   /polls/:id/            => Get the voting form (sets or removes the cookie & resets navbar)
+- POST  /polls/:id/            => Votes on a poll
+
+- GET   /thank-you
+- GET   /error
+
+
+
