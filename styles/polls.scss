@@ -1,1 +1,83 @@
 @import "base";
+
+body {
+  background-color: $background-primary-color;
+}
+
+.polls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: $primary-font;
+  margin: 5rem;
+  overflow-wrap: break-word;
+
+    .title {
+      font-size: 1.5rem;
+    }
+}
+
+.poll {
+  border: solid $lines-color medium;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: $background-secondary-color;
+
+  &:hover {
+    box-shadow: 0 0 1rem rgba(33,33,33,.2);
+  }
+}
+
+.poll > header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+
+  .right-corner-icons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .results-button {
+    color: $white-color;
+    border-radius: 0.3rem;
+    background-color: $lines-color;
+  }
+
+  .complete-button {
+    color: $white-color;
+    border-radius: 0.3rem;
+    background-color: $complete-btn-color;
+  }
+}
+
+.poll > footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid $lines-color medium;
+  padding: 1rem;
+  font-size: 1rem;
+
+  .right-corner-icons {
+    display: flex;
+    justify-content: space-between;
+
+    .votes {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .fa-share:hover {
+    color: $nav-color;
+  }
+
+  .fa-user:hover {
+    color: $nav-color;
+  }
+}
+
+.see-more {
+  padding-top: 1.5rem;
+}
