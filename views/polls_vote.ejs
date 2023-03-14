@@ -11,23 +11,17 @@
 
           <form action="/polls/<%- poll.id %>" method="POST">
 
-
-
             <h3> <%- poll.title %></h3>
 
             <div class="meta">
               <label for="name"> Name</label>
               <input id="name" name="name" type="text" placeholder="Enter your name">
             </div>
-
             <h3> <%- poll.question %></h3>
-
-
+            <div class="instruction">Drag and drop the choices to sort them from the most to the least preferable</div>
             <div class="choices-container">
-
               <% for (let choice in poll.choices) { %>
                 <div class="option">
-
                   <div class="rank">
                     <%- Number(choice)+1 %>
                   </div>
@@ -36,14 +30,9 @@
                     <div class="draggable" draggable="true" id="<%- poll.choices[choice].id %>">
                       <%- poll.choices[choice].description %>
                     </div>
-
                   </div>
-
                 </div>
-
-
                 <% } %>
-
             </div>
 
             <button class="vote-button"> Vote</button>

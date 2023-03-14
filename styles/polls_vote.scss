@@ -2,7 +2,7 @@
 
 .vote {
   h3 {
-    margin: 2%;
+    margin: 1% 0;
   }
 }
 
@@ -66,4 +66,9 @@
   cursor: pointer;
   align-self: flex-end;
 
+}
+
+.instruction {
+  font-size: 0.8em;
+  color: #323232;
 }
