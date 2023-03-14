@@ -20,6 +20,11 @@ $(document).ready(function () {
 
   });
 
+  $('.dropable').on("dragend", (event) => {
+    const dragSlot = dragged.parent()[0];
+    dragSlot.style.display = "flex";
+  });
+
   $('.dropable').on('drop', function (event) {
     event.preventDefault();
     $(event.currentTarget).removeClass('active');
