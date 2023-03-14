@@ -1,9 +1,5 @@
 @import "base";
 
-body {
-  background-color: $background-primary-color;
-}
-
 .polls {
   display: flex;
   flex-direction: column;
@@ -44,6 +40,7 @@ body {
     color: $white-color;
     border-radius: 0.3rem;
     background-color: $lines-color;
+    font-size: large;
   }
 
   .complete-button {
@@ -51,6 +48,7 @@ body {
     border-radius: 0.3rem;
     background-color: $complete-btn-color;
     margin-left: 0.5rem;
+    font-size: large;
   }
 }
 
