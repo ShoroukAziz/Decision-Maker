@@ -2,7 +2,21 @@ const express = require('express');
 const router  = express.Router();
 const pollsQueries = require('../db/queries/polls');
 
-router.get('/polls', (req, res) => {
+router.get('/api', (req, res) => {
+  const creatorId = 1;
+  pollsQueries.getAllPolls(creatorId)
+    .then(polls => {
+      return res.json(polls);
+    })
+
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+})
+
+router.get('/', (req, res) => {
   const creatorId = 1;
   pollsQueries.getAllPolls(creatorId)
     .then(polls => {
