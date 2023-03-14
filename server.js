@@ -32,7 +32,7 @@ app.use(express.static('public'));
 // const widgetApiRoutes = require('./routes/widgets-api');
 const pollsRoutes = require('./routes/polls');
 const pollsNewRoutes = require('./routes/polls-new');
-const pollResultsRoutes= require('.routes/polls-results');
+const pollResultsRoutes = require('./routes/polls-results');
 const completeRoutes = require('./routes/polls-complete');
 const voteRoutes = require('./routes/polls-vote');
 const thankYouRoutes = require('./routes/thank-you');
