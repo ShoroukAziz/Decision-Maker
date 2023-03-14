@@ -4,6 +4,9 @@ $(document).ready(function () {
 
   $('.draggable').on('dragstart', function (event) {
     dragged = $(this)
+    setTimeout(() => {
+      dragged.parent().css("display", "none")
+    }, 0);
   })
 
 
@@ -28,6 +31,8 @@ $(document).ready(function () {
     draggedElement.remove();
     dragSlot.appendChild(replacedElement);
     dropSlot.appendChild(draggedElement);
+    console.log(dragSlot.style);
+    dragSlot.style.display = "flex";
 
   })
 
