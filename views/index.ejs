@@ -8,9 +8,9 @@
 
     <div class="polls">
       <div class="title">Active Polls - <%= active_polls %></div>
-      <article class="poll">
-        <% for (const poll in polls) { %>
-          <% if (!poll.complete) { %>
+      <% for (const poll of polls) { %>
+        <% if (!poll.complete) { %>
+        <article class="poll">
           <header>
               <div class="title"><%= poll.title %></div>
               <div class="right-corner-buttons">
@@ -20,7 +20,7 @@
           </header>
 
           <footer>
-            <div class="date">Date created: <%= poll.date_created %></div>
+            <div class="date">Date created: <%= (poll.date_created).toLocaleDateString() %></div>
             <div class="right-corner-icons">
               <i class="fa-solid fa-share"></i>
               <div class="votes">
@@ -29,7 +29,7 @@
               </div>
             </div>
           </footer>
-      </article>
+        </article>
         <% } %>
       <% } %>
       <a href="#" class="see-more">See more</a>
@@ -37,9 +37,9 @@
 
   <div class="polls">
     <div class="title">Completed Polls - <%= completed_polls %></div>
+    <% for (const poll of polls) { %>
+      <% if (poll.complete) { %>
       <article class="poll">
-        <% for (const poll in polls) { %>
-          <% if (poll.complete) { %>
         <header>
             <div class="title"><%= poll.title %></div>
             <div class="right-corner-buttons">
@@ -48,18 +48,18 @@
         </header>
 
         <footer>
-          <div class="date">Date completed: <%= poll.date_completed %></div>
+          <div class="date">Date completed: <%= (poll.date_completed) %></div>
           <div class="right-corner-icons">
             <div class="votes">
-              <i class="fa-solid fa-user"></i>
-              <span class="total-votes"><%= poll.total_votes %></span>
+                <i class="fa-solid fa-user"></i>
+                <span class="total-votes"><%= poll.total_votes %></span>
             </div>
           </div>
         </footer>
       </article>
-      <a href="" class="see-more">See more
-        <% } %>
       <% } %>
+    <% } %>
+    <a href="" class="see-more">See more
 </div>
 
   </body>
