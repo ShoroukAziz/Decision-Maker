@@ -2,8 +2,65 @@
 <html lang="en">
 
 <%- include('partials/_head',{title:'ChoiceMate'}) %>
+<%- include('partials/_nav') %>
 
   <body>
+
+    <div class="polls">
+      <div class="title">Active Polls - <%= active_polls %></div>
+      <% for (const poll of polls) { %>
+        <% if (!poll.complete) { %>
+        <article class="poll">
+          <header>
+              <div class="title"><%= poll.title %></div>
+              <div class="right-corner-buttons">
+                <button class="results-button">Results</button>
+                <button class="complete-button">Complete</button>
+              </div>
+          </header>
+
+          <footer>
+            <div class="date">Date created: <%= (poll.date_created).toLocaleDateString() %></div>
+            <div class="right-corner-icons">
+              <i class="fa-solid fa-share"></i>
+              <div class="votes">
+                <i class="fa-solid fa-user"></i>
+                <div class="total-votes"><%= poll.total_votes %></div>
+              </div>
+            </div>
+          </footer>
+        </article>
+        <% } %>
+      <% } %>
+      <a href="#" class="see-more">See more</a>
+  </div>
+
+  <div class="polls">
+    <div class="title">Completed Polls - <%= completed_polls %></div>
+    <% for (const poll of polls) { %>
+      <% if (poll.complete) { %>
+      <article class="poll">
+        <header>
+            <div class="title"><%= poll.title %></div>
+            <div class="right-corner-buttons">
+              <button class="results-button">Results</button>
+            </div>
+        </header>
+
+        <footer>
+          <div class="date">Date completed: <%= (poll.date_completed) %></div>
+          <div class="right-corner-icons">
+            <div class="votes">
+                <i class="fa-solid fa-user"></i>
+                <span class="total-votes"><%= poll.total_votes %></span>
+            </div>
+          </div>
+        </footer>
+      </article>
+      <% } %>
+    <% } %>
+    <a href="" class="see-more">See more
+</div>
 
   </body>
 

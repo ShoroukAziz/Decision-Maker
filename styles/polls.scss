@@ -1,1 +1,93 @@
 @import "base";
+
+.polls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: $primary-font;
+  margin-top: 4rem;
+  margin-right: 15rem;
+  margin-left: 15rem;
+  margin-bottom: 4rem;
+  overflow-wrap: break-word;
+
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+.poll {
+  margin-top: 2rem;
+  border: solid $lines-color medium;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  background-color: $background-secondary-color;
+
+  &:hover {
+    box-shadow: 0 0 1rem rgba(33,33,33,.2);
+  }
+}
+
+.poll > header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  margin-bottom: 1rem;
+
+  .right-corner-icons {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .results-button {
+    color: $white-color;
+    border-radius: 0.3rem;
+    background-color: $lines-color;
+    font-size: large;
+  }
+
+  .complete-button {
+    color: $white-color;
+    border-radius: 0.3rem;
+    background-color: $complete-btn-color;
+    margin-left: 0.5rem;
+    font-size: large;
+  }
+}
+
+.poll > footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid $lines-color medium;
+  padding: 1rem;
+  font-size: 1rem;
+
+  .right-corner-icons {
+    display: flex;
+    align-items: center;
+
+    .votes {
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;
+
+      .total-votes {
+        margin-left: 0.2rem;
+      }
+    }
+
+    .fa-share:hover {
+      color: $nav-color;
+    }
+
+    .fa-user:hover {
+      color: $nav-color;
+    }
+  }
+}
+
+.see-more {
+  padding-top: 1.5rem;
+  text-decoration: none;
+  color: $lines-color;
+}
