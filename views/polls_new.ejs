@@ -2,9 +2,50 @@
 <html lang="en">
 
 <%- include('partials/_head',{title:'ChoiceMate - Create a New Poll'}) %>
+  <%- include('partials/_nav') %>
 
-  <body>
+    <body>
 
-  </body>
+      <main>
+        <div class="container">
+
+          <form action="/polls" method="POST">
+
+
+            <div class="meta">
+              <label for="title"> Title</label>
+              <input id="title" name="title" type="text" placeholder="Enter your poll title">
+            </div>
+            <div class="meta">
+              <label for="question"> Question</label>
+              <input id="question" name="question" type="text" placeholder="Enter your poll question">
+            </div>
+
+
+            <fieldset>
+              <label>Choices</label>
+              <div class="choice">
+                <input name="choice-1" type="text" placeholder="Add a choice">
+                <i class="delete-button fas fa-trash-alt"></i>
+              </div>
+              <div class="choice">
+                <input name="choice-2" type="text" placeholder="Add a choice">
+                <i class="delete-button fas fa-trash-alt"></i>
+              </div>
+
+            </fieldset>
+            <i class="add-button fas fa-plus-circle"></i>
+
+
+
+            <button class="action-button">Create a New Poll</button>
+
+          </form>
+
+        </div>
+      </main>
+
+
+    </body>
 
 </html>
