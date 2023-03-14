@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <%- include('partials/_head',{title:'ChoiceMate - Create a New Poll'}) %>
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="/styles/polls_new.css" />
+  </head>
   <%- include('partials/_nav') %>
 
     <body>
@@ -25,11 +30,11 @@
             <fieldset>
               <label>Choices</label>
               <div class="choice">
-                <input name="choice-1" type="text" placeholder="Add a choice">
+                <input id="1" name="choice-1" type="text" placeholder="Add a choice">
                 <i class="delete-button fas fa-trash-alt"></i>
               </div>
               <div class="choice">
-                <input name="choice-2" type="text" placeholder="Add a choice">
+                <input id="2" name="choice-2" type="text" placeholder="Add a choice">
                 <i class="delete-button fas fa-trash-alt"></i>
               </div>
 
