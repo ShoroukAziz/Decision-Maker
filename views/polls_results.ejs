@@ -2,29 +2,31 @@
 <html lang="en">
 
   <%- include('partials/_head',{title:'ChoiceMate - Poll Results'}) %>
-    <link rel="stylesheet" href="/styles/polls_results.css" />
+    <link rel="stylesheet" href="/styles/polls_results.css"/>
   </html>
   <body>
     <%- include('partials/_nav') %>
-    <main class='poll-results'>
-      <section class='poll-header'>
-        <h1><%= pollTitle %></h1>
-        <p><%= numOfVoters %><i class="fa-solid fa-user"></i></p>
-      </section>
-      <section class='poll-body'>
-        <h2><%= pollQuestion %></h2>
-        <% for (const option in options) { %>
-          <div class='option'>
-            <div class='graph-bar-container'>
-              <div class='graph-bar-opt' style='width: <%= options[option].percentage %>%'></div>
+    <main>
+      <container class='poll-results'>
+        <section class='poll-header'>
+          <h1><%= pollTitle %></h1>
+          <p><%= numOfVoters %><i class="fa-solid fa-user"></i></p>
+        </section>
+        <section class='poll-body'>
+          <h2><%= pollQuestion %></h2>
+          <% for (const option in options) { %>
+            <div class='option'>
+              <div class='graph-bar-container'>
+                <div class='graph-bar-opt' style='width: <%= options[option].percentage %>%'></div>
+              </div>
+              <p><%= options[option].percentage %>% <%= options[option].name %></p>
             </div>
-            <p><%= options[option].percentage %>% <%= options[option].name %></p>
-          </div>
-        <% } %>
-      </section>
-      <section class='poll-footer'>
-        <button type='button'>Complete</button>
-      </section>
+          <% } %>
+        </section>
+        <section class='poll-footer'>
+          <button type='button'>Complete</button>
+        </section>
+      </container>
     </main>
   </body>
 
