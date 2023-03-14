@@ -21,7 +21,7 @@ const getAllPolls = function (creator_id) {
       return data.rows;
     })
     .catch((err) => {
-      console.log(err.message);
+      console.log('error:', err.message);
     });
 };
 
