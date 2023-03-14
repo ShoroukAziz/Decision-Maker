@@ -5,13 +5,25 @@
 
   <body>
     <%- include('partials/_nav') %>
-    <main>
-      <h1>Poll Title</h1>
-      <p>Total Voters: 10</p>
-      <h3>Question</h3>
-      <%- for (let option_result of votes_result) { %>
-        <div style="background-color: aqua;"></div>
-      <%- } %>
+    <main class='poll-results'>
+      <section class='poll-header'>
+        <h1><%= pollTitle %></h1>
+        <p><%= numOfVoters %><i class="fa-solid fa-user"></i></p>
+      </section>
+      <section class='poll-body'>
+        <h2><%= pollQuestion %></h2>
+        <% for (const option in options) { %>
+          <div class='option'>
+            <div class='graph-bar-container'>
+              <div class='graph-bar-opt' style='width: <%= options[option].percentage %>%'></div>
+            </div>
+            <p><%= options[option].percentage %>% <%= options[option].name %></p>
+          </div>
+        <% } %>
+      </section>
+      <section class='poll-footer'>
+        <button type='button'>Complete</button>
+      </section>
     </main>
   </body>
 
