@@ -1,18 +1,31 @@
 @import "base";
 
+.polls-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-family: $primary-font;
+  margin-top: 2rem;
+  margin-left: 15rem;
+  margin-right: 15rem;
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+}
+
 .polls {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   font-family: $primary-font;
-  margin-top: 4rem;
-  margin-right: 15rem;
-  margin-left: 15rem;
+  margin-top: 1rem;
   margin-bottom: 4rem;
   overflow-wrap: break-word;
 
   .title {
-    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -86,8 +99,14 @@
   }
 }
 
-.see-more {
-  padding-top: 1.5rem;
-  text-decoration: none;
+.see-more-active, .see-more-completed {
+  align-self: flex-start;
   color: $lines-color;
+  background-color: transparent;
+  margin-top: 1rem;
+  border: none;
+
+    &:hover {
+      color: $nav-color;
+    }
 }
