@@ -1,0 +1,23 @@
+<header>
+  <nav>
+
+    <div>
+      <span class="logo">ChoiceMate</span>
+      <% if (locals.user) { %>
+        <a href="/index"> My Polls</a>
+        <% } %>
+    </div>
+
+    <div>
+      <% if (locals.user) { %>
+        <span>Welcome <%- user.name %>!</span>
+        <a class="action-button" href="/polls/new"><i class="fas fa-plus-square"></i>New Poll</a>
+        <%} else { %>
+          <a class="action-button" href="/"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a class="action-button" href="/"><i class="fas fa-user-plus"></i> Register</a>
+          <% } %>
+
+    </div>
+
+  </nav>
+</header>

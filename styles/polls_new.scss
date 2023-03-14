@@ -1,1 +1,104 @@
 @import "base";
+
+body {
+  background-color: $background-primary-color;
+  font-family: $primary-font;
+  font-size: 24px;
+
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  padding: 2%;
+}
+
+.container {
+  background-color: $background-secondary-color;
+  border: 3px solid $lines-color;
+  min-height: 300px;
+  min-width: 800px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8%;
+    row-gap: 30px
+  }
+
+  .meta {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+  }
+
+  input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid $lines-color;
+    height: 50px;
+  }
+
+  label {
+
+    font-weight: 600;
+    font-size: 1.1em;
+  }
+}
+
+button.action-button {
+  color: $white-color;
+  background-color: $call-to-action-color;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 25px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+
+
+
+.add-button {
+  align-self: flex-start;
+  color: $white-color;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 25px;
+  cursor: pointer;
+  background-color: $lines-color;
+
+  i {
+    margin-right: 5%;
+  }
+}
+
+
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  border: none;
+  padding: 0;
+}
+
+.choice {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  input {
+    flex-grow: 2;
+  }
+
+  .delete-button {
+    color: $lines-color;
+    padding: 5px 5px 0px 10px;
+    cursor: pointer;
+  }
+}
