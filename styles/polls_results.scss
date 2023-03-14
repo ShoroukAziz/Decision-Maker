@@ -1,1 +1,110 @@
 @import "base";
+
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $background-primary-color;
+  color: $lines-color;
+  font-family: $primary-font;
+}
+
+.poll-results {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $background-secondary-color;
+  border: 0.2rem solid $lines-color;
+  border-radius: 0.3rem;
+  width: 60%;
+
+  .poll-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem;
+    h1, p {
+      margin: 0;
+    }
+
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+    }
+  }
+
+  .poll-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 0.5rem;
+
+    h2 {
+      display: block;
+      width: 100%;
+      margin: 1rem 0;
+    }
+
+    .option {
+      width: 100%;
+      .graph-bar-container {
+        background-color:  $nav-color;
+        height: 1.5rem;
+        width: 100%;
+        border-radius: 0.3rem;
+
+        @keyframes populate-bar {
+          from {width: 0%;}
+        }
+
+        .graph-bar-opt{
+          background-color: $lines-color;
+          height: 1.5rem;
+          border-radius: 0.3rem;
+          animation-name: populate-bar;
+          animation-duration: 2s;
+        }
+      }
+
+      p {
+        padding-left: 0.5rem;
+        margin: 0.5rem 0;
+      }
+    }
+
+  }
+
+  .poll-footer {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
+
+    button {
+      background-color: $complete-btn-color;
+      color: $white-color;
+      border-radius: 0.3rem;
+      font-size: 1.2rem;
+      padding: 0.5rem 0.7rem;
+
+      &:hover {
+        background-color: #BD7A75;
+        cursor: pointer;
+      }
+
+      &:active {
+        background-color: #8A4742;
+        box-shadow: 2px 2px 3px #696366;
+      }
+
+    }
+  }
+
+}
