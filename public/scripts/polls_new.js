@@ -2,13 +2,11 @@ $(document).ready(function () {
 
   $(".add-button").click(function () {
 
-    const fieldset = $('fieldset');
-    const currentCount = fieldset.children().length;
-    console.log(currentCount);
-    fieldset.append(createChoiceElement(currentCount));
+    const lastId = Number($('div.choice').last().find('input').attr('id')) || 0;
+    $('fieldset').append(createChoiceElement(lastId + 1));
+
   });
 
-  //TODO : see what you're gonna do about the name property
   $('form').on('click', '.delete-button', function () {
     console.log("clicked");
     $(this).parent().remove();
@@ -18,12 +16,13 @@ $(document).ready(function () {
 });
 
 
-const createChoiceElement = function (currentCount) {
+const createChoiceElement = function (id) {
   return `
      <div class="choice">
-      <input name="choice-${currentCount}" type="text" placeholder="Add a choice">
+      <input id="${id}" name="choice-${id}" type="text" placeholder="Add a choice">
       <i class="delete-button fas fa-trash-alt"></i>
      </div>
 
   `
 }
+
