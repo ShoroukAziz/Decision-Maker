@@ -24,7 +24,7 @@ const createPoll = function (creatorId, poll) {
     }
   });
 
-  queryString += ';'
+  queryString += 'returning (SELECT id FROM new_poll);'
 
   const values = [creatorId, poll.title, poll.question].concat(poll.options);
   // console.log(queryString);
@@ -33,7 +33,7 @@ const createPoll = function (creatorId, poll) {
 
   return db.query(queryString, values)
     .then((data) => {
-      return;
+      return data;
     })
     .catch((err) => {
       console.log('error:', err.message);
