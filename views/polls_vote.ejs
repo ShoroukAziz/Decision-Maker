@@ -30,7 +30,7 @@
                   <div class="rank">
                     <%- Number(choice)+1 %>
                   </div>
-                  <div class="dropable" rank="<%- choice %>">
+                  <div class="dropable" name="<%- choice %>">
                     <i class="fas fa-grip-vertical"></i>
                     <div class="draggable" draggable="true" id="<%- choices[choice].id %>">
                       <%- choices[choice].description %>
@@ -39,7 +39,7 @@
                 </div>
                 <% } %>
             </div>
-
+            <input style="display: none;" type="text" name="results" id="results">
             <button class="vote-button"> Vote</button>
           </form>
 
