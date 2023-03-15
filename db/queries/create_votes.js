@@ -3,6 +3,7 @@ const db = require('../connection');
 const insertVotes = function (pollId, voterName, results) {
 
   results = results.split(',');
+  const n = results.length;
   let queryString = `
 
   WITH new_voter AS(
@@ -17,7 +18,7 @@ const insertVotes = function (pollId, voterName, results) {
 
   results.forEach((result, index) => {
     queryString += `
-     ((SELECT id FROM new_voter) , ${pollId}, ${result} , ${index + 1} )
+     ((SELECT id FROM new_voter) , ${pollId}, ${result} , ${n - (index + 1)} )
     `;
     if (index < results.length - 1) {
       queryString += ', '
