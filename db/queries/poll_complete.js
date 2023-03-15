@@ -3,12 +3,12 @@ const db = require('../connection');
 const completePoll = function (poll_id) {
   const queryString = `
   UPDATE polls
-  SET complete = $1,
+  SET complete = true,
       date_completed = NOW()
-  WHERE id = $2;`;
-  const values = ['true', poll_id];
+  WHERE id = $1
+  RETURNING id;`;
 
-  return db.query(queryString, values)
+  return db.query(queryString, [poll_id])
     .then((data) => {
       return data.rows;
     })

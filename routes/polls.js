@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const sendEmail = require('../mailgun.js');
+const sendEmail = require('../lib/mailgun.js');
 
 const pollsQueries = require('../db/queries/polls');
-const newPollQueries = require('../db/queries/new_poll');
-const getPollQueries = require('../db/queries/get_poll');
-const votingQueries = require('../db/queries/create_votes');
-
+const newPollQueries = require('../db/queries/poll_new');
+const getPollQueries = require('../db/queries/poll_get');
+const votingQueries = require('../db/queries/vote_new');
+const pollCompleteQueries = require('../db/queries/poll_complete');
+const queryPolls = require('../db/queries/poll_details');
+const queryOptions = require('../db/queries/poll_options');
+const sumConverter = require('../lib/sumsConverter');
 
 router.get('/api', (req, res) => {
   const creatorId = 1; // replace by user
@@ -36,6 +39,10 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/new', (req, res) => {
+  res.render('polls_new');
+});
+
 router.post('/', (req, res) => {
   console.log("req Body", req.body);
 
@@ -47,15 +54,14 @@ router.post('/', (req, res) => {
   })
     .then((data) => {
       const createdPollId = data.rows[0].id;
-      const creatorEmail = data.rows[0].email
       // todo: helper function to build urls from id
       // todo : pass the urls and email to mailgun function
 
       sendEmail(`Your New poll is ready to share! - ${req.body.title}`, `
 
       Your new poll "${req.body.title}" is ready to share with your family & friends!\n
-      Share URL:  http://localhost:8080/polls/${createdPollId}\n
-      Results URL:  href="http://localhost:8080/polls/${createdPollId}/results
+      Share URL:  <a href='http://localhost:8080/polls/${createdPollId}'>Vote on - "${req.body.title}"\n</a>
+      Results URL:  <a href='http://localhost:8080/polls/${createdPollId}/results'>Poll Results - "${req.body.title}"</a>
 
       `);
 
@@ -97,6 +103,16 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.post('/:id/complete', (req, res) => {
+  const pollId = req.params.id;
+  pollCompleteQueries.completePoll(pollId)
+    .then(poll => {
+      res.sendStatus(204);
+    })
+    .catch((err) => {
+      console.error('error:', err);
+    });
+})
 
 router.post('/:id', (req, res) => {
 
@@ -105,9 +121,15 @@ router.post('/:id', (req, res) => {
   votingQueries.insertVotes(req.params.id, req.body.name, req.body.results)
     .then((data) => {
 
-      const creatorEmail = data.rows[0].email;
+      const pollTitle = data.rows[0].title;
       // todo: helper function to build urls from id
-      // todo : pass the urls and email to mailgun function
+      sendEmail(`New Poll Submission on - ${pollTitle} - by ${req.body.name}`, `
+
+      Your new poll "${pollTitle}" is ready to share with your family & friends!\n
+      Share URL:  <a href='http://localhost:8080/polls/${createdPollId}'>Vote on - "${pollTitle}"\n</a>
+      Results URL:  <a href='http://localhost:8080/polls/${createdPollId}/results'>Poll Results - "${pollTitle}"</a>
+
+      `);
 
 
       res.redirect('/thank-you');
@@ -119,5 +141,48 @@ router.post('/:id', (req, res) => {
     });
 });
 
+router.get('/:id/results', (req, res) => {
+  queryPolls.getPollDetails(req.params.id)
+    .then(pollDetails => {
+
+      if (pollDetails.length === 0) {
+        return res.redirect('/error');
+      }
+
+      queryOptions.getPollOptions(req.params.id)
+        .then(pollOptions => {
+          const converted = sumConverter.toPercentage(pollOptions);
+          const pollResultsQuery = {
+            pollIdNum: pollDetails[0].id,
+            pollTitle: pollDetails[0].title,
+            numOfVoters: pollDetails[0].total_voters,
+            pollQuestion: pollDetails[0].question,
+            options: converted
+          }
+          return res.render('polls_results', pollResultsQuery);
+        })
+        .catch(error => {
+          res.statusCode = 404;
+          return res.render('error', {code: 404});
+        });
+    })
+    .catch(error => {
+      res.statusCode = 404;
+      return res.render('error', {code: 404});
+    });
+});
+
+router.patch('/:id/results', (req, res) => {
+  pollCompleteQueries.setPollToComplete(req.params.id)
+    .then(pollId => {
+      return res.redirect('/thank-you');
+      //Suppose to render to index page and get all the polls from the db after updating database by complting the poll.
+      // return res.redirect('/thank_you');
+    })
+    .catch(error => {
+      res.statusCode = 404;
+      return res.render('error', {code: 404});
+    });
+});
 
 module.exports = router;
