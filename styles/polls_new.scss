@@ -102,3 +102,28 @@ fieldset {
     cursor: pointer;
   }
 }
+
+
+///////////// Errors : TODO Move to seprate files
+.user-input-warning {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(254, 184, 184);
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  color: $lines-color;
+
+  p {
+    margin-left: 15px;
+  }
+}
+
+
+.close {
+  margin-left: auto;
+  align-self: flex-start;
+  cursor: pointer;
+}
