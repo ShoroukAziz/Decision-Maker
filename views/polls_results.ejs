@@ -10,16 +10,16 @@
       <container class='poll-results'>
         <section class='poll-header'>
           <h1><%= pollTitle %></h1>
-          <p><%= numOfVoters %><i class="fa-solid fa-user"></i></p>
+          <p><%= numOfVoters %><i class="fas fa-user" id="voter-counter"></i></p>
         </section>
         <section class='poll-body'>
           <h2><%= pollQuestion %></h2>
-          <% for (const option in options) { %>
+          <% for (const option of options) { %>
             <div class='option'>
               <div class='graph-bar-container'>
-                <div class='graph-bar-opt' style='width: <%= options[option].percentage %>%'></div>
+                <div class='graph-bar-opt' <% /* eslint-disable css-propertyvalueexpected */ %> style='width: <%= option.sum %>%;' ></div>
               </div>
-              <p><%= options[option].percentage %>% <%= options[option].name %></p>
+              <p><%= option.sum %>% <%= option.description %></p>
             </div>
           <% } %>
         </section>
