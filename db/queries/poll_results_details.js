@@ -15,10 +15,11 @@ const getPollDetails = (pollId) => {
       title,
       question
     FROM polls
-    where id = $1
+    where id = $1 and complete != true
   )
 
   SELECT
+    id,
     title,
     question,
     total_voters

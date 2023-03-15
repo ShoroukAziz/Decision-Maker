@@ -24,7 +24,9 @@
           <% } %>
         </section>
         <section class='poll-footer'>
-          <button type='button'>Complete</button>
+          <form method="POST" action="/polls/<%= pollIdNum %>/results?_method=PATCH" onsubmit="return confirm('Poll will be marked as complete, press OK to confirm.')">
+            <button type='submit'>Complete</button>
+          </form>
         </section>
       </container>
     </main>
