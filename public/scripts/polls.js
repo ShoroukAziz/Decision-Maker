@@ -99,6 +99,11 @@ $(document).ready(function() {
   };
 
   const showCompletedPollElement = (poll) => {
+    let dateCompleted = new Date(poll.date_completed);
+    // if statement for testing purposes
+    if (!poll.date_completed) {
+      dateCompleted = new Date();
+    }
     const $completedPoll = $(`
       <article class="poll">
         <header>
@@ -108,7 +113,7 @@ $(document).ready(function() {
           </div>
         </header>
         <footer>
-          <div class="date">Date completed: ${(poll.date_completed)}</div>
+          <div class="date">Date completed: ${dateCompleted.toLocaleDateString()}</div>
           <div class="right-corner-icons">
             <div class="votes">
               <div class="tooltip">
