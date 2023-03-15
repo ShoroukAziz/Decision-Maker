@@ -3,7 +3,8 @@ const db = require('../connection');
 const completePoll = function (poll_id) {
   const queryString = `
   UPDATE polls
-  SET complete = $1
+  SET complete = $1,
+      date_completed = NOW()
   WHERE id = $2;`;
   const values = ['true', poll_id];
 

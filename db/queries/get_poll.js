@@ -2,7 +2,6 @@ const db = require('../connection');
 
 const getPollAndOptionsByPollId = function (pollId) {
 
-  // SELECT polls JOIN options JOIN users(poll_id, poll title, option_description, options, creator_email)
   const queryString = `
     SELECT polls.id, title, question ,  users.email, options.id as option_id , options.description
     FROM polls

@@ -36,13 +36,6 @@ router.get('/', (req, res) => {
     });
 });
 
-
-
-router.get('/', (req, res) => {
-  res.render('thank_you');
-});
-
-
 router.post('/', (req, res) => {
   console.log("req Body", req.body);
 

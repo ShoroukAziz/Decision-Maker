@@ -34,8 +34,6 @@ INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (12, 1, 1
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (13, 1, 1, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (13, 1, 2, 1);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (13, 1, 3, 0);
-
-
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 2, 4, 3);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 2, 5, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 2, 6, 1);
@@ -92,8 +90,6 @@ INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (15, 2, 7
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (15, 2, 6, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (15, 2, 5, 1);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (15, 2, 4, 0);
-
-
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 3, 8, 4);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 3, 9, 3);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 3, 10, 2);
@@ -114,8 +110,6 @@ INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (5, 3, 11
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (5, 3, 10, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (5, 3, 9, 1);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (5, 3, 12, 0);
-
-
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 4, 13, 3);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 4, 14, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 4, 15, 1);
@@ -124,8 +118,6 @@ INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (3, 4, 15
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (3, 4, 16, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (3, 4, 13, 1);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (3, 4, 14, 0);
-
-
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 5, 17, 2);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 5, 18, 1);
 INSERT INTO votes (voter_id, poll_id, option_id, rank_position) VALUES (2, 5, 19, 0);
