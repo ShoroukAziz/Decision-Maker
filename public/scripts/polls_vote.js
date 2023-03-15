@@ -41,4 +41,15 @@ $(document).ready(function () {
 
   })
 
+
+  $('form').on('submit', function (e) {
+
+    const results = [];
+    $('.draggable').each(function (i) {
+      results.push($(this).attr('id'));
+    });
+    $('#results:text').val(results.join(','));
+    $(this).submit();
+  });
+
 });
