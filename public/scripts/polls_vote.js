@@ -43,6 +43,14 @@ $(document).ready(function () {
 
   $('form').on('submit', function (e) {
 
+    const { isValid, errorMesage } = validateVite($('#name:text').val());
+    if (!isValid) {
+      e.preventDefault();
+      const errorMessageElement = createErrorMessageElement(errorMesage);
+      $('.meta').prepend(errorMessageElement);
+      return;
+    }
+
     const results = [];
     $('.draggable').each(function (i) {
       results.push($(this).attr('id'));
@@ -51,4 +59,20 @@ $(document).ready(function () {
     $(this).submit();
   });
 
+
+  // Attach a delegated event handler to close the warnings
+  $('form').on('click', '.close', function () {
+    $(this).parent().remove();
+  });
+
 });
+
+////// Helpers -----------------------------
+
+const validateVite = function (voterName) {
+  if (!voterName.trim()) {
+    return { isValid: false, errorMesage: systemMessages.emptyVoterNameError };
+  }
+  return { isValid: true };
+};
+
