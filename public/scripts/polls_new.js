@@ -32,7 +32,7 @@ $(document).ready(function () {
       $('form').prepend(errorMessageElement);
       return;
     }
-
+    return confirm(systemMessages.confirmPollSubmission);
   })
 
 });

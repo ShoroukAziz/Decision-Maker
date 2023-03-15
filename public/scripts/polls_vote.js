@@ -56,7 +56,8 @@ $(document).ready(function () {
       results.push($(this).attr('id'));
     });
     $('#results:text').val(results.join(','));
-    $(this).submit();
+    return confirm(systemMessages.confirmVote);
+
   });
 
 
