@@ -1,15 +1,33 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into /users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const router  = express.Router();
+const pollsQueries = require('../db/queries/polls');
+
+router.get('/api', (req, res) => {
+  const creatorId = 1; // replace by user
+  pollsQueries.getAllPolls(creatorId)
+    .then(polls => {
+      return res.json(polls);
+    })
+
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+})
 
 router.get('/', (req, res) => {
-  res.render('thank_you');
+  const creatorId = 1; // replace by user
+  pollsQueries.getAllPolls(creatorId)
+    .then(() => {
+      res.render('index');
+    })
+
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 module.exports = router;
