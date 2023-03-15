@@ -7,22 +7,80 @@ $(document).ready(function () {
 
   });
 
+  // Attach a delegated event handler to delete options
   $('form').on('click', '.delete-button', function () {
-    console.log("clicked");
     $(this).parent().remove();
   });
 
 
+  // Attach a delegated event handler to close the warnings
+  $('form').on('click', '.close', function () {
+    $(this).parent().remove();
+  });
+
+
+  $('form').on('submit', function (e) {
+
+    const title = $('#title:text').val();
+    const question = $('#question:text').val();
+    const choices = $('.choice');
+
+    const { isValid, errorMesage } = validateNewPollForm(title, question, choices);
+    if (!isValid) {
+      e.preventDefault();
+      const errorMessageElement = createErrorMessageElement(errorMesage);
+      $('form').prepend(errorMessageElement);
+      return;
+    }
+
+  })
+
 });
 
 
-const createChoiceElement = function (id) {
-  return `
-     <div class="choice">
-      <input id="${id}" name="choice-${id}" type="text" placeholder="Add a choice">
-      <i class="delete-button fas fa-trash-alt"></i>
-     </div>
 
-  `
+
+////// Helpers -----------------------------
+
+const validateNewPollForm = function (title, question, choices) {
+
+  if (!validateNotEmpty(title)) {
+    return { isValid: false, errorMesage: systemMessages.emptyTitleError };
+  }
+  if (!validateNotEmpty(question)) {
+    return { isValid: false, errorMesage: systemMessages.emptyQuestionError };
+  }
+  if (!validateChoicesCount(choices, MIN_CHOICES_COUNT)) {
+    return { isValid: false, errorMesage: systemMessages.lessThanTwoOptionsError };
+  }
+  if (!validateChoicesFeilds(choices)) {
+    return { isValid: false, errorMesage: systemMessages.emptyChoiceFeildsError };
+  }
+
+
+  return { isValid: true }
+};
+
+const validateNotEmpty = function (text) {
+  return text.trim()
+};
+
+const validateChoicesCount = function (choices, count) {
+  return choices.length >= count;
+}
+
+
+const validateChoicesFeilds = function (choices) {
+  let emptyChoice = false;
+  choices.each(function () {
+    choiceText = $(this).find('input:text').val();
+    console.log(choiceText);
+
+    if (!validateNotEmpty(choiceText)) {
+      emptyChoice = true;
+      return false;
+    }
+  });
+  return !emptyChoice;
 }
 
