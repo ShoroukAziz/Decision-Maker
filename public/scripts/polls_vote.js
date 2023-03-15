@@ -43,7 +43,7 @@ $(document).ready(function () {
 
   $('form').on('submit', function (e) {
 
-    const { isValid, errorMesage } = validateVite($('#name:text').val());
+    const { isValid, errorMesage } = validateVote($('#name:text').val());
     if (!isValid) {
       e.preventDefault();
       const errorMessageElement = createErrorMessageElement(errorMesage);
@@ -69,7 +69,7 @@ $(document).ready(function () {
 
 ////// Helpers -----------------------------
 
-const validateVite = function (voterName) {
+const validateVote = function (voterName) {
   if (!voterName.trim()) {
     return { isValid: false, errorMesage: systemMessages.emptyVoterNameError };
   }
