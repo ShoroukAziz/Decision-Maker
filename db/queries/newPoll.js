@@ -24,12 +24,15 @@ const createPoll = function (creatorId, poll) {
     }
   });
 
-  queryString += 'returning (SELECT id FROM new_poll);'
+  queryString += `
+  RETURNING
+  (SELECT id FROM new_poll) ,
+  ( SELECT users.email
+     FROM users
+     WHERE id = ${creatorId}
+  );`
 
   const values = [creatorId, poll.title, poll.question].concat(poll.options);
-  // console.log(queryString);
-  // console.log('---------------');
-  // console.log("values", values);
 
   return db.query(queryString, values)
     .then((data) => {
