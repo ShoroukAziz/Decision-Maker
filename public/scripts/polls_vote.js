@@ -31,12 +31,11 @@ $(document).ready(function () {
     const dragSlot = dragged.parent()[0];
     const draggedElement = dragged[0];
     const dropSlot = $(this)[0];
-    const replacedElement = dropSlot.children[1];
+    const replacedElement = dropSlot.children[0];
     replacedElement.remove();
     draggedElement.remove();
     dragSlot.appendChild(replacedElement);
     dropSlot.appendChild(draggedElement);
-    console.log(dragSlot.style);
     dragSlot.style.display = "flex";
 
   })
