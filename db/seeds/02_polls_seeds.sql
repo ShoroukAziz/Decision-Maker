@@ -1,10 +1,10 @@
 INSERT INTO polls (creator_id, title, question) VALUES (1, 'Cafe for Lunch', 'Which cafe do you guys want to go to for lunch tomorrow?');
 INSERT INTO polls (creator_id, title, question) VALUES (1, 'Friday Movie Night Genre', 'What genre of movie would you like to watch this Friday?');
 INSERT INTO polls (creator_id, title, question) VALUES (1, 'Surprise Party Ideas for Kim''s BD', 'What should we do to celebrate Kim''s birthday?');
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'Tonight''s Dinner', 'What should we make for dinner tonight?', true);
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'Weekend Trip - Campsite Options', 'Which campsite should we stay at during our trip this weekend?', true);
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'Vegas Trip', 'Where should we stay?', true);
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'Superbowl Winner', 'Who is gonna win this time?', true);
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'Best Ice Cream Falvour', 'Chocolate or Vanilla?', true);
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'New Game Console', 'Which one should I get?', true);
-INSERT INTO polls (creator_id, title, question, complete) VALUES (1, 'Fly or Drive', 'Should we go on a road trip or fly and spend more days exploring the city?', true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'Tonight''s Dinner', 'What should we make for dinner tonight?', NOW(), true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'Weekend Trip - Campsite Options', 'Which campsite should we stay at during our trip this weekend?', NOW(), true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'Vegas Trip', 'Where should we stay?', NOW(), true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'Superbowl Winner', 'Who is gonna win this time?', NOW(), true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'Best Ice Cream Falvour', 'Chocolate or Vanilla?', NOW(), true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'New Game Console', 'Which one should I get?', NOW(), true);
+INSERT INTO polls (creator_id, title, question, date_completed, complete) VALUES (1, 'Fly or Drive', 'Should we go on a road trip or fly and spend more days exploring the city?', NOW(), true);

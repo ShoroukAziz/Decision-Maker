@@ -5,6 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,16 +26,18 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(methodOverride('_method'))
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 // const userApiRoutes = require('./routes/users-api');
 // const widgetApiRoutes = require('./routes/widgets-api');
-const pollsRoutes = require('./routes/polls');
-const pollsNewRoutes = require('./routes/polls-new');
-const pollResultsRoutes= require('.routes/polls-results');
-const completeRoutes = require('./routes/polls-complete');
-const voteRoutes = require('./routes/polls-vote');
+
+// const pollsRoutes = require('./routes/polls');
+// const pollsNewRoutes = require('./routes/polls-new');
+const pollResultsRoutes = require('./routes/polls-results');
+// const completeRoutes = require('./routes/polls-complete');
+// const voteRoutes = require('./routes/polls-vote');
 const thankYouRoutes = require('./routes/thank-you');
 const errorRoutes = require('./routes/error');
 
@@ -43,11 +46,12 @@ const errorRoutes = require('./routes/error');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // app.use('/api/users', userApiRoutes);
 // app.use('/api/widgets', widgetApiRoutes);
-app.use('/polls/new', pollsNewRoutes);
-app.use('/polls/:id/results', pollResultsRoutes);
-app.use('/polls/:id/complete', completeRoutes);
-app.use('/polls/:id', voteRoutes);
-app.use('/polls', pollsRoutes);
+
+// app.use('/polls/new', pollsNewRoutes);
+app.use('/polls', pollResultsRoutes);
+// app.use('/polls/:id/complete', completeRoutes);
+// app.use('/polls/:id', voteRoutes);
+// app.use('/polls', pollsRoutes);
 app.use('/thank-you', thankYouRoutes);
 app.use('/error', errorRoutes);
 // Note: mount other resources here, using the same pattern above

@@ -6,11 +6,17 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: $background-primary-color;
   color: $lines-color;
   font-family: $primary-font;
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .poll-results {
@@ -36,6 +42,12 @@ body {
       justify-content: center;
       align-items: center;
       font-size: 2rem;
+
+      #voter-counter {
+        padding-left: 0.5rem;
+        font-size: 1.5rem;
+      }
+
     }
   }
 
