@@ -37,7 +37,7 @@ $(document).ready(function() {
           <div class="right-corner-icons">
             <div class="tooltip">
               <span class="tooltiptext">Click here to copy shareable link</span>
-              <button class="share-button" data-copy="http://localhost:8080/polls/vote/${poll.id}"><i class="fa-solid fa-share"></i></button>
+              <button class="share-button" data-copy="http://localhost:8080/polls/${poll.id}"><i class="fa-solid fa-share"></i></button>
               <p class="copy-notification">Link copied!</p>
             </div>
             <div class="votes">
@@ -190,7 +190,7 @@ $(document).ready(function() {
     e.preventDefault();
     const pollId = $(this).attr('data-poll-id');
 
-    $.ajax(`/complete/${pollId}`, {
+    $.ajax(`/polls/${pollId}/complete`, {
       method: 'POST'
     })
     .then(() => {
@@ -207,7 +207,7 @@ $(document).ready(function() {
   $('body').on('click', '.results-button', function(e) {
     e.preventDefault();
     const pollId = $(this).attr('data-poll-id');
-    window.location.href = `/results/${pollId}`;
+    window.location.href = `/polls/${pollId}/results`;
   });
 
   // SHARE ICON
