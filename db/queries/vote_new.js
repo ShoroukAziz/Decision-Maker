@@ -26,11 +26,7 @@ const insertVotes = function (pollId, voterName, results) {
   });
 
   queryString += `RETURNING (
-    SELECT users.email
-     FROM users
-     JOIN polls on polls.creator_id = users.id
-     WHERE polls.id = ${pollId}
-     );`
+    SELECT title FROM polls WHERE id = ${pollId});`
 
   return db.query(queryString, [voterName])
     .then((data) => {
