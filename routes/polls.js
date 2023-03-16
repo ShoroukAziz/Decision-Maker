@@ -39,10 +39,18 @@ router.get('/', (req, res) => {
     });
 });
 
+
+/*
+* Retrieves The new poll form
+*/
 router.get('/new', (req, res) => {
-  res.render('polls_new');
+  // TODO: replace the hardcoded object with the cookie object
+  res.render('polls_new', { user: { email: "choicemateapp@gmail.com" } });
 });
 
+/*
+*  Submits a new Poll
+*/
 router.post('/', (req, res) => {
   console.log("req Body", req.body);
 
@@ -54,31 +62,30 @@ router.post('/', (req, res) => {
   })
     .then((data) => {
       const createdPollId = data.rows[0].id;
-      // todo: helper function to build urls from id
-      // todo : pass the urls and email to mailgun function
-
-      sendEmail(`Your New poll is ready to share! - ${req.body.title}`, `
-
-      Your new poll "${req.body.title}" is ready to share with your family & friends!\n
-      Share URL:  <a href='http://localhost:8080/polls/${createdPollId}'>Vote on - "${req.body.title}"\n</a>
-      Results URL:  <a href='http://localhost:8080/polls/${createdPollId}/results'>Poll Results - "${req.body.title}"</a>
-
-      `);
-
+      sendEmail('poll', req.body.title, createdPollId);
       res.redirect('/polls');
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      const statusCode = 500;
+      res.status(statusCode);
+      return res.render('error', { code: statusCode });
     });
 });
 
+
+/*
+* Retrieves a specific poll to vote on it
+*/
 router.get('/:id', (req, res) => {
 
   getPollQueries.getPollAndOptionsByPollId(req.params.id)
     .then((data) => {
 
+      if (data[0].complete) {
+        const statusCode = 401;
+        res.status(statusCode);
+        return res.render('error', { code: statusCode });
+      }
       const choices = [];
       data.forEach(element => {
         choices.push(
@@ -97,11 +104,13 @@ router.get('/:id', (req, res) => {
       res.render('polls_vote', templateVars);
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      const statusCode = 500;
+      res.status(statusCode);
+      return res.render('error', { code: statusCode });
     });
 });
+
+
 
 router.post('/:id/complete', (req, res) => {
   const pollId = req.params.id;
@@ -114,30 +123,21 @@ router.post('/:id/complete', (req, res) => {
     });
 })
 
+/*
+* Submits a vote on a poll
+*/
 router.post('/:id', (req, res) => {
-
-  console.log(req.body);
 
   votingQueries.insertVotes(req.params.id, req.body.name, req.body.results)
     .then((data) => {
-
       const pollTitle = data.rows[0].title;
-      // todo: helper function to build urls from id
-      sendEmail(`New Poll Submission on - ${pollTitle} - by ${req.body.name}`, `
-
-      Your new poll "${pollTitle}" is ready to share with your family & friends!\n
-      Share URL:  <a href='http://localhost:8080/polls/${createdPollId}'>Vote on - "${pollTitle}"\n</a>
-      Results URL:  <a href='http://localhost:8080/polls/${createdPollId}/results'>Poll Results - "${pollTitle}"</a>
-
-      `);
-
-
+      sendEmail('vote', pollTitle, req.params.id, req.body.name);
       res.redirect('/thank-you');
     })
     .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      const statusCode = 500;
+      res.status(statusCode);
+      return res.render('error', { code: statusCode });
     });
 });
 
@@ -147,7 +147,7 @@ router.get('/:id/results', (req, res) => {
       console.log(pollDetails)
       if (pollDetails.length === 0) {
         res.statusCode = 404;
-        return res.redirect('/error', {code: 404});
+        return res.redirect('/error', { code: 404 });
       }
 
       queryOptions.getPollOptions(req.params.id)
@@ -170,12 +170,12 @@ router.get('/:id/results', (req, res) => {
         })
         .catch(error => {
           res.statusCode = 404;
-          return res.render('error', {code: 404});
+          return res.render('error', { code: 404 });
         });
     })
     .catch(error => {
       res.statusCode = 400;
-      return res.render('error', {code: 400});
+      return res.render('error', { code: 400 });
     });
 });
 
@@ -186,7 +186,7 @@ router.patch('/:id/results', (req, res) => {
     })
     .catch(error => {
       res.statusCode = 404;
-      return res.render('error', {code: 404});
+      return res.render('error', { code: 404 });
     });
 });
 
