@@ -100,7 +100,8 @@ $(document).ready(function() {
     itemsToShow = polls.length >= 2 ? 2 : polls.length;
     polls.length <= 2 ? $('.see-more-completed').hide() : $('.see-more-completed').show();
     if (!polls.length) {
-      return $($completedPollsContainer).hide();
+      $($activePollsContainer).hide();
+      $('.active-polls-title').hide();
     }
     for (let i = 0; i < itemsToShow; i++) {
       const completedPoll = showCompletedPollElement(polls[i]);
@@ -155,7 +156,6 @@ $(document).ready(function() {
           itemsToShow++;
           if (itemsToShow === completedPolls.length) {
             $('.see-more-completed').hide();
-            $('.completed-polls-title').hide();
           }
         }
       })
