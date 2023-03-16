@@ -21,6 +21,7 @@ $(document).ready(function() {
   };
 
   const showActivePollElement = (poll) => {
+    console.log('poll', poll)
     const dateCreated = new Date(poll.date_created);
     const $activePoll = $(`
       <article class="poll">
@@ -28,18 +29,20 @@ $(document).ready(function() {
           <div class="title">${poll.title}</div>
           <div class="right-corner-buttons">
           <form>
-            <button class="results-button" data-poll-id="${poll.id}">Results</button>
-            <button type="submit" class="complete-button" data-poll-id="${poll.id}">Complete</button></form>
+            <button class="btn btn-outline-secondary results-button" data-poll-id="${poll.id}">Results</button>
+            <button type="submit" class="btn btn-outline-secondary complete-button" data-poll-id="${poll.id}">Complete</button></form>
           </div>
         </header>
         <footer>
           <div class="date">Date created: ${dateCreated.toLocaleDateString()}</div>
+
           <div class="right-corner-icons">
             <div class="tooltip">
               <span class="tooltiptext">Click here to copy shareable link</span>
-              <button class="share-button" data-copy="http://localhost:8080/polls/vote/${poll.id}"><i class="fa-solid fa-share"></i></button>
+              <button class="share-button" data-copy="http://localhost:8080/polls/${poll.id}"><i class="fa-solid fa-share"></i></button>
               <p class="copy-notification">Link copied!</p>
             </div>
+
             <div class="votes">
               <div class="tooltip">
                 <span class="tooltiptext">Total votes</span>
@@ -99,16 +102,21 @@ $(document).ready(function() {
   };
 
   const showCompletedPollElement = (poll) => {
+    let dateCompleted = new Date(poll.date_completed);
+    // if statement for testing purposes
+    if (!poll.date_completed) {
+      dateCompleted = new Date();
+    }
     const $completedPoll = $(`
       <article class="poll">
         <header>
           <div class="title">${poll.title}</div>
           <div class="right-corner-buttons">
-            <button class="results-button" data-poll-id="${poll.id}">Results</button>
+            <button class="btn btn-outline-secondary results-button" data-poll-id="${poll.id}">Results</button>
           </div>
         </header>
         <footer>
-          <div class="date">Date completed: ${(poll.date_completed)}</div>
+          <div class="date">Date completed: ${dateCompleted.toLocaleDateString()}</div>
           <div class="right-corner-icons">
             <div class="votes">
               <div class="tooltip">
@@ -184,22 +192,24 @@ $(document).ready(function() {
   loadActivePolls();
   loadCompletedPolls();
 
-  // COMPLETE POLL
+  // COMPLETE POLL BUTTON
 
   $('body').on('click', '.complete-button', function(e) {
     e.preventDefault();
     const pollId = $(this).attr('data-poll-id');
 
-    $.ajax(`/complete/${pollId}`, {
-      method: 'POST'
-    })
-    .then(() => {
-      loadActivePolls();
-      loadCompletedPolls()
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
+    if (confirm('Poll will be marked as complete, press OK to confirm.')) {
+      $.ajax(`/polls/${pollId}/complete`, {
+        method: 'POST'
+      })
+      .then(() => {
+        loadActivePolls();
+        loadCompletedPolls()
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+    }
   });
 
   // POLL RESULTS BUTTON
@@ -207,7 +217,7 @@ $(document).ready(function() {
   $('body').on('click', '.results-button', function(e) {
     e.preventDefault();
     const pollId = $(this).attr('data-poll-id');
-    window.location.href = `/results/${pollId}`;
+    window.location.href = `/polls/${pollId}/results`;
   });
 
   // SHARE ICON
@@ -228,5 +238,23 @@ $(document).ready(function() {
         console.log('error', err);
       });
     });
+
+  // TOGGLE BUTTON
+
+  $('.toggle-button').hide();
+
+  const lastScroll = 0;
+  $(window).scroll(function() {
+    const currentScroll = $(this).scrollTop();
+    if (currentScroll > lastScroll) {
+      $('.toggle-button').show();
+    } else {
+      $('.toggle-button').hide();
+    }
+  });
+
+  $('.toggle-button').click(function () {
+    $('html').animate({ scrollTop: 0 });
+  })
 
 });

@@ -1,21 +1,25 @@
 @import "base";
 
+body {
+  background-color: $background-primary-color;
+}
+
+
 .error {
   font-family: $primary-font;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: $lines-color;
 
     h1 {
       font-size: 3rem;
       font-weight: bold;
-      color: $lines-color;
       margin-bottom: 0.5rem;
     }
 
     p {
       font-size: 1.5rem;
-      color: $lines-color;
     }
 }

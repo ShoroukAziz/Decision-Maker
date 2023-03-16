@@ -2,28 +2,46 @@
 <html lang="en">
 
 <%- include('partials/_head',{title:'ChoiceMate'}) %>
+
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Bootstrap CSS -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap-reboot.min.css" integrity="sha512-IS8Z2ZgFvTz/yLxE6H07ip/Ad+yAGswoD1VliOeC2T4WaPFNPC1TwmQ5zomGS+syaR2oO3aXJGKaHv21Dspx0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- App CSS -->
 <link rel="stylesheet" href="/styles/polls.css" />
-  <!-- App JS -->
-  <script defer src="/scripts/polls.js"></script>
+
+<!-- App JS -->
+<script defer src="/scripts/polls.js"></script>
 
 </head>
+
 <%- include('partials/_nav') %>
 
-  <body>
+  <main>
+    <body>
 
-    <div class="polls-container">
-      <div class="active-polls-title"></div>
-      <div class="polls" id="active-polls"></div>
-      <button class="see-more-active">See more</button>
-    </div>
+      <div class="polls-container">
+        <div class="active-polls-title"></div>
+        <div class="polls" id="active-polls"></div>
+        <button class="see-more-active">See more</button>
+      </div>
 
-    <div class="polls-container">
-      <div class="completed-polls-title"></div>
-      <div class="polls" id="completed-polls"></div>
-      <button class="see-more-completed">See more</button>
-    </div>
+      <div class="polls-container">
+        <div class="completed-polls-title"></div>
+        <div class="polls" id="completed-polls"></div>
+        <button class="see-more-completed">See more</button>
+      </div>
 
-  </body>
+      <button class="toggle-button">
+        <i class="fa-solid fa-circle-chevron-up"></i>
+      </button>
+
+      <!-- Bootstrap JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+  </main>
 
 </html>
