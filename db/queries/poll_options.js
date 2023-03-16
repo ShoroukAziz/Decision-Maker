@@ -19,7 +19,7 @@ const getPollOptions = (pollId) => {
     description,
     sum
   FROM summary_of_options
-  JOIN summary_of_votes
+  LEFT JOIN summary_of_votes
     ON summary_of_options.id = summary_of_votes.option_id;
   `
   return db.query(pollsQuery, [pollId])

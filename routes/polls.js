@@ -139,8 +139,10 @@ router.post('/:id', (req, res) => {
 });
 
 router.get('/:id/results', (req, res) => {
-  pollsQueries.getAllPolls(req.params.id)
+  const creator_id = 1;
+  pollsQueries.getAllPolls(creator_id)
     .then(data => {
+
       let pollDetails;
       for (let element of data) {
         if (element.id === Number(req.params.id)) {
@@ -148,6 +150,7 @@ router.get('/:id/results', (req, res) => {
           break;
         }
       }
+
       console.log("pollDetails", pollDetails)
 
       if (pollDetails.length === 0) {
@@ -158,6 +161,7 @@ router.get('/:id/results', (req, res) => {
       queryOptions.getPollOptions(req.params.id)
         .then(pollOptions => {
           const converted = sumConverter.toPercentage(pollOptions);
+          console.log('converted', converted);
           const pollResultsQuery = {
             user: { email: "choicemateapp@gmail.com" },
             pollIdNum: pollDetails.id,
