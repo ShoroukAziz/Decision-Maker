@@ -120,12 +120,6 @@ router.get('/:id', (req, res) => {
         title: data[0].title,
         question: data[0].question,
         choices,
-        user:
-        {
-          id: req.session.userId,
-          email: req.session.userEmail,
-          name: req.session.userName
-        }
       };
       res.render('polls_vote', templateVars);
     })
