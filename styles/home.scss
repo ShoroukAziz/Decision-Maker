@@ -27,7 +27,7 @@ main {
   height: 60%;
   display: flex;
   justify-content: space-between;
-  background-color: $white-color;
+  background-color: $background-secondary-color;
   border: 0.2rem solid $lines-color;
   padding: 2rem;
 }
@@ -57,7 +57,6 @@ h2 {
 .rotating-message{
     width: 80%;
     height: auto;
-    background-color: $white-color;
     border-bottom: 0.2rem solid $lines-color;
 }
 
