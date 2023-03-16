@@ -9,7 +9,7 @@ $(document).ready(function () {
 
   // Attach a delegated event handler to delete options
   $('form').on('click', '.delete-button', function () {
-    $(this).parent().parent().remove();
+    $(this).parent().remove();
   });
 
 
