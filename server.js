@@ -6,6 +6,8 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const cookieSession = require('cookie-session');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -27,6 +29,11 @@ app.use(
 );
 app.use(express.static('public'));
 app.use(methodOverride('_method'))
+app.use(cookieSession({
+  name: 'session',
+  keys: ['834975rjher43nf43895rjd98', 'gfjhg786675hg6756gf56gfhf7ui'],
+}));
+
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -34,6 +41,9 @@ app.use(methodOverride('_method'))
 const pollsRoutes = require('./routes/polls');
 const thankYouRoutes = require('./routes/thank-you');
 const errorRoutes = require('./routes/error');
+const loginRoutes = require('./routes/login');
+const logoutRoutes = require('./routes/logout');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -41,6 +51,8 @@ const errorRoutes = require('./routes/error');
 app.use('/polls', pollsRoutes);
 app.use('/thank-you', thankYouRoutes);
 app.use('/error', errorRoutes);
+app.use('/login', loginRoutes);
+app.use('/logout', logoutRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -48,10 +60,22 @@ app.use('/error', errorRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+
 app.get('/', (req, res) => {
-  res.render('home');
+  let templateVars = {};
+  if (req.session.userId) {
+    templateVars = {
+      user:
+      {
+        id: req.session.userId,
+        email: req.session.userEmail,
+        name: req.session.userName
+      }
+    }
+  }
+  res.render('home', templateVars);
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`ChoiceMate app listening on port ${PORT}`);
 });

@@ -28,7 +28,14 @@ router.get('/', (req, res) => {
   const creatorId = 1; // replace by user
   pollsQueries.getAllPolls(creatorId)
     .then(() => {
-      res.render('index', {user: { email: "choicemateapp@gmail.com" }});
+      res.render('index', {
+        user:
+        {
+          id: req.session.userId,
+          email: req.session.userEmail,
+          name: req.session.userName
+        }
+      });
     })
 
     .catch(err => {
@@ -44,7 +51,14 @@ router.get('/', (req, res) => {
 */
 router.get('/new', (req, res) => {
   // TODO: replace the hardcoded object with the cookie object
-  res.render('polls_new', { user: { email: "choicemateapp@gmail.com" } });
+  res.render('polls_new', {
+    user:
+    {
+      id: req.session.userId,
+      email: req.session.userEmail,
+      name: req.session.userName
+    }
+  });
 });
 
 /*
@@ -67,7 +81,14 @@ router.post('/', (req, res) => {
     .catch(err => {
       const statusCode = 500;
       res.status(statusCode);
-      return res.render('error', { code: statusCode });
+      return res.render('error', {
+        code: statusCode, user:
+        {
+          id: req.session.userId,
+          email: req.session.userEmail,
+          name: req.session.userName
+        }
+      });
     });
 });
 
@@ -98,14 +119,27 @@ router.get('/:id', (req, res) => {
         id: data[0].id,
         title: data[0].title,
         question: data[0].question,
-        choices
+        choices,
+        user:
+        {
+          id: req.session.userId,
+          email: req.session.userEmail,
+          name: req.session.userName
+        }
       };
       res.render('polls_vote', templateVars);
     })
     .catch(err => {
       const statusCode = 500;
       res.status(statusCode);
-      return res.render('error', { code: statusCode });
+      return res.render('error', {
+        code: statusCode, user:
+        {
+          id: req.session.userId,
+          email: req.session.userEmail,
+          name: req.session.userName
+        }
+      });
     });
 });
 
@@ -152,14 +186,27 @@ router.get('/:id/results', (req, res) => {
 
       if (pollDetails.length === 0) {
         res.statusCode = 404;
-        return res.redirect('/error', { code: 404 });
+        return res.redirect('/error', {
+          code: 404,
+          user:
+          {
+            id: req.session.userId,
+            email: req.session.userEmail,
+            name: req.session.userName
+          }
+        });
       }
 
       queryOptions.getPollOptions(req.params.id)
         .then(pollOptions => {
           const converted = sumConverter.toPercentage(pollOptions);
           const pollResultsQuery = {
-            user: { email: "choicemateapp@gmail.com" },
+            user:
+            {
+              id: req.session.userId,
+              email: req.session.userEmail,
+              name: req.session.userName
+            },
             pollIdNum: pollDetails.id,
             pollTitle: pollDetails.title,
             numOfVoters: pollDetails.total_votes,
@@ -177,13 +224,27 @@ router.get('/:id/results', (req, res) => {
         .catch(error => {
           console.log('error 1')
           res.statusCode = 404;
-          return res.render('error', { code: 404 });
+          return res.render('error', {
+            code: 404, user:
+            {
+              id: req.session.userId,
+              email: req.session.userEmail,
+              name: req.session.userName
+            }
+          });
         });
     })
     .catch(error => {
       console.log('error 2')
       res.statusCode = 400;
-      return res.render('error', { code: 400 });
+      return res.render('error', {
+        code: 400, user:
+        {
+          id: req.session.userId,
+          email: req.session.userEmail,
+          name: req.session.userName
+        }
+      });
     });
 });
 
@@ -194,7 +255,15 @@ router.patch('/:id/results', (req, res) => {
     })
     .catch(error => {
       res.statusCode = 404;
-      return res.render('error', { code: 404 });
+      return res.render('error', {
+        code: 404,
+        user:
+        {
+          id: req.session.userId,
+          email: req.session.userEmail,
+          name: req.session.userName
+        }
+      });
     });
 });
 
