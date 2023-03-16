@@ -75,6 +75,10 @@ button.action-button {
   i {
     margin-right: 5%;
   }
+
+  &:hover {
+    color: rgb(231, 180, 180);
+  }
 }
 
 
@@ -100,6 +104,10 @@ fieldset {
     color: $lines-color;
     padding: 5px 5px 0px 10px;
     cursor: pointer;
+
+    &:hover {
+      color: rgb(92, 0, 0);
+    }
   }
 }
 
@@ -126,4 +134,41 @@ fieldset {
   margin-left: auto;
   align-self: flex-start;
   cursor: pointer;
+}
+
+////////////////////
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  transform: translate(-50%, 0);
+  background-color: #F9F0F1;
+  border: solid #201E1F thin;
+  margin-top: 0.1rem;
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  border-color: #201E1F;
+  color: #201E1F;
+  z-index: 5;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip.delete {
+  align-self: flex-end;
+}
+
+.tooltip.add {
+  align-self: flex-start;
 }
