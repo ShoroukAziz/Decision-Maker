@@ -31,15 +31,24 @@
               <label>Choices</label>
               <div class="choice">
                 <input id="1" name="choice-1" type="text" placeholder="Add a choice">
-                <i class="delete-button fas fa-trash-alt"></i>
+                <div class="tooltip delete">
+                  <span class="tooltiptext">Delete this choice</span>
+                  <i class="delete-button fas fa-trash-alt"></i>
+                </div>
               </div>
               <div class="choice">
                 <input id="2" name="choice-2" type="text" placeholder="Add a choice">
-                <i class="delete-button fas fa-trash-alt"></i>
+                <div class="tooltip delete">
+                  <span class="tooltiptext">Delete this choice</span>
+                  <i class="delete-button fas fa-trash-alt"></i>
+                </div>
               </div>
 
             </fieldset>
-            <i class="add-button fas fa-plus-circle"></i>
+            <div class="tooltip add">
+              <span class="tooltiptext">Add another choice</span>
+              <i class="add-button fas fa-plus-circle"></i>
+            </div>
             <button class="action-button">Create a New Poll</button>
 
           </form>
