@@ -16,26 +16,32 @@
 <!-- App JS -->
 <script defer src="/scripts/polls.js"></script>
 
-
 </head>
+
 <%- include('partials/_nav') %>
 
-  <body>
+  <main>
+    <body>
 
-    <div class="polls-container">
-      <div class="active-polls-title"></div>
-      <div class="polls" id="active-polls"></div>
-      <button class="see-more-active">See more</button>
-    </div>
+      <div class="polls-container">
+        <div class="active-polls-title"></div>
+        <div class="polls" id="active-polls"></div>
+        <button class="see-more-active">See more</button>
+      </div>
 
-    <div class="polls-container">
-      <div class="completed-polls-title"></div>
-      <div class="polls" id="completed-polls"></div>
-      <button class="see-more-completed">See more</button>
-    </div>
+      <div class="polls-container">
+        <div class="completed-polls-title"></div>
+        <div class="polls" id="completed-polls"></div>
+        <button class="see-more-completed">See more</button>
+      </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  </body>
+      <button class="toggle-button">
+        <i class="fa-solid fa-circle-chevron-up"></i>
+      </button>
+
+      <!-- Bootstrap JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    </body>
+  </main>
 
 </html>
