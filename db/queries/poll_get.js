@@ -3,7 +3,7 @@ const db = require('../connection');
 const getPollAndOptionsByPollId = function (pollId) {
 
   const queryString = `
-    SELECT polls.id, title, question ,  users.email, options.id as option_id , options.description
+    SELECT polls.id, title, question ,  users.email, options.id as option_id , options.description , polls.complete
     FROM polls
     JOIN options
     ON  polls.id = options.poll_id
