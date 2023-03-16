@@ -39,8 +39,6 @@ const insertVotes = function (pollId, voterName, results) {
 };
 
 const randomVotes = function (pollId, pollResults, pollName) {
-  console.log(pollId, pollResults, pollName);
-  console.log('made it inside randomVoters')
   const voterNames = [
     'Emma West',
     'Tatiana Wall',
@@ -55,20 +53,16 @@ const randomVotes = function (pollId, pollResults, pollName) {
   ];
 
   function shuffleArray(array) {
-    console.log('array went in', array);
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
-    console.log('array came out', array);
     return array;
   }
 
   for (const name of voterNames) {
-    console.log('made it inside the for loop')
     results = pollResults.split(',');
     shuffleArray(results);
-    console.log('shuffled results')
     const n = results.length;
     let queryString = `
     WITH new_voter AS(
@@ -92,12 +86,10 @@ const randomVotes = function (pollId, pollResults, pollName) {
 
     queryString += `RETURNING (
       SELECT title FROM polls WHERE id = ${pollId});`
-    console.log('finalized building the query', queryString);
+
     db.query(queryString, [name])
       .then((data) => {
-        console.log('ran query')
         sendEmail('vote', pollName, pollId, name);
-        console.log('sent email')
       })
       .catch((err) => {
         console.log('error:', err.message);
