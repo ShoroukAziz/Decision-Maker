@@ -2,9 +2,9 @@ const db = require('../connection');
 
 const getAllPolls = function (creator_id) {
   const queryString = `
-  SELECT polls.id, title, date_created, date_completed, complete, count(voter_id) as total_votes
+  SELECT polls.id, title, question, date_created, date_completed, complete, count(voter_id) as total_votes
   FROM polls
-  JOIN (
+  LEFT JOIN (
     SELECT poll_id, voter_id
     FROM votes
     GROUP BY voter_id, poll_id

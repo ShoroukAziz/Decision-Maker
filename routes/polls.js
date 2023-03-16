@@ -7,7 +7,6 @@ const newPollQueries = require('../db/queries/poll_new');
 const getPollQueries = require('../db/queries/poll_get');
 const votingQueries = require('../db/queries/vote_new');
 const pollCompleteQueries = require('../db/queries/poll_complete');
-const queryPolls = require('../db/queries/poll_details');
 const queryOptions = require('../db/queries/poll_options');
 const sumConverter = require('../lib/sumsConverter');
 
@@ -29,7 +28,7 @@ router.get('/', (req, res) => {
   const creatorId = 1; // replace by user
   pollsQueries.getAllPolls(creatorId)
     .then(() => {
-      res.render('index');
+      res.render('index', {user: { email: "choicemateapp@gmail.com" }});
     })
 
     .catch(err => {
@@ -110,8 +109,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-
-
 router.post('/:id/complete', (req, res) => {
   const pollId = req.params.id;
   pollCompleteQueries.completePoll(pollId)
@@ -142,9 +139,17 @@ router.post('/:id', (req, res) => {
 });
 
 router.get('/:id/results', (req, res) => {
-  queryPolls.getPollDetails(req.params.id)
-    .then(pollDetails => {
-      console.log(pollDetails)
+  pollsQueries.getAllPolls(req.params.id)
+    .then(data => {
+      let pollDetails;
+      for (let element of data) {
+        if (element.id === Number(req.params.id)) {
+          pollDetails = element;
+          break;
+        }
+      }
+      console.log("pollDetails", pollDetails)
+
       if (pollDetails.length === 0) {
         res.statusCode = 404;
         return res.redirect('/error', { code: 404 });
@@ -154,26 +159,29 @@ router.get('/:id/results', (req, res) => {
         .then(pollOptions => {
           const converted = sumConverter.toPercentage(pollOptions);
           const pollResultsQuery = {
-            pollIdNum: pollDetails[0].id,
-            pollTitle: pollDetails[0].title,
-            numOfVoters: pollDetails[0].total_voters,
-            pollQuestion: pollDetails[0].question,
+            user: { email: "choicemateapp@gmail.com" },
+            pollIdNum: pollDetails.id,
+            pollTitle: pollDetails.title,
+            numOfVoters: pollDetails.total_votes,
+            pollQuestion: pollDetails.question,
             options: converted,
             buttonState: ""
           }
 
-          if (pollDetails[0].complete) {
+          if (pollDetails.complete) {
             pollResultsQuery.buttonState = 'disabled';
           }
 
           return res.render('polls_results', pollResultsQuery);
         })
         .catch(error => {
+          console.log('error 1')
           res.statusCode = 404;
           return res.render('error', { code: 404 });
         });
     })
     .catch(error => {
+      console.log('error 2')
       res.statusCode = 400;
       return res.render('error', { code: 400 });
     });
