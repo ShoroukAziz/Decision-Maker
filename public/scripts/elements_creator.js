@@ -18,7 +18,10 @@ const createChoiceElement = function (id) {
   return `
      <div class="choice">
       <input id="${id}" name="choice-${id}" type="text" placeholder="Add a choice">
+       <div class="tooltip delete">
+       <span class="tooltiptext">Delete this choice</span>
       <i class="delete-button fas fa-trash-alt"></i>
+      </div>
      </div>
 
   `
