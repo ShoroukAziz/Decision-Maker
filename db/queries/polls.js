@@ -8,7 +8,6 @@ const getAllPolls = function (creator_id) {
     SELECT poll_id, voter_id
     FROM votes
     GROUP BY voter_id, poll_id
-    ORDER BY poll_id, voter_id
   ) as votes ON polls.id = poll_id
   WHERE creator_id = $1
   GROUP BY polls.id
