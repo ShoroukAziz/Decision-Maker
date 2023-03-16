@@ -192,22 +192,24 @@ $(document).ready(function() {
   loadActivePolls();
   loadCompletedPolls();
 
-  // COMPLETE POLL
+  // COMPLETE POLL BUTTON
 
   $('body').on('click', '.complete-button', function(e) {
     e.preventDefault();
     const pollId = $(this).attr('data-poll-id');
 
-    $.ajax(`/polls/${pollId}/complete`, {
-      method: 'POST'
-    })
-    .then(() => {
-      loadActivePolls();
-      loadCompletedPolls()
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
+    if (confirm('Poll will be marked as complete, press OK to confirm.')) {
+      $.ajax(`/polls/${pollId}/complete`, {
+        method: 'POST'
+      })
+      .then(() => {
+        loadActivePolls();
+        loadCompletedPolls()
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+    }
   });
 
   // POLL RESULTS BUTTON
@@ -236,5 +238,23 @@ $(document).ready(function() {
         console.log('error', err);
       });
     });
+
+  // TOGGLE BUTTON
+
+  $('.toggle-button').hide();
+
+  const lastScroll = 0;
+  $(window).scroll(function() {
+    const currentScroll = $(this).scrollTop();
+    if (currentScroll > lastScroll) {
+      $('.toggle-button').show();
+    } else {
+      $('.toggle-button').hide();
+    }
+  });
+
+  $('.toggle-button').click(function () {
+    $('html').animate({ scrollTop: 0 });
+  })
 
 });
