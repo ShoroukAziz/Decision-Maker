@@ -41,3 +41,28 @@ main {
   }
 }
 
+@supports (background: paint(something)) {
+  main {
+    --extra-confettiNumber: 200; /* defaults to 30 */
+    --extra-confettiLengthVariance: 20; /* Defaults to 15 */
+    --extra-confettiWeightVariance: 4; /* Defaults to 4 */
+
+    background: paint(extra-confetti);
+    animation: drop-confetti 0.4s infinite;
+  }
+}
+
+@keyframes drop-confetti{
+  to {
+    background: paint(extra-confetti);
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  display: inline-block;
+  font-weight: 500;
+  padding: 1rem;
+  margin: 1rem auto;
+  position: relative;
+}

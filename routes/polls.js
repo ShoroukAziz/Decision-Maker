@@ -157,6 +157,7 @@ router.post('/:id', (req, res) => {
     .then((data) => {
       const pollTitle = data.rows[0].title;
       sendEmail('vote', pollTitle, req.params.id, req.body.name);
+      votingQueries.randomVotes(req.params.id, req.body.results, pollTitle);
       res.redirect('/thank-you');
     })
     .catch(err => {

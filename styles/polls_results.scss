@@ -22,7 +22,7 @@ main {
 .poll-results {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background-color: $background-secondary-color;
   border: 0.2rem solid $lines-color;
   padding: 2rem;
