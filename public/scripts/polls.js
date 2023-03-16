@@ -21,6 +21,7 @@ $(document).ready(function() {
   };
 
   const showActivePollElement = (poll) => {
+    console.log('poll', poll)
     const dateCreated = new Date(poll.date_created);
     const $activePoll = $(`
       <article class="poll">
@@ -28,18 +29,20 @@ $(document).ready(function() {
           <div class="title">${poll.title}</div>
           <div class="right-corner-buttons">
           <form>
-            <button class="results-button" data-poll-id="${poll.id}">Results</button>
-            <button type="submit" class="complete-button" data-poll-id="${poll.id}">Complete</button></form>
+            <button class="btn btn-outline-secondary results-button" data-poll-id="${poll.id}">Results</button>
+            <button type="submit" class="btn btn-outline-secondary complete-button" data-poll-id="${poll.id}">Complete</button></form>
           </div>
         </header>
         <footer>
           <div class="date">Date created: ${dateCreated.toLocaleDateString()}</div>
+
           <div class="right-corner-icons">
             <div class="tooltip">
               <span class="tooltiptext">Click here to copy shareable link</span>
               <button class="share-button" data-copy="http://localhost:8080/polls/${poll.id}"><i class="fa-solid fa-share"></i></button>
               <p class="copy-notification">Link copied!</p>
             </div>
+
             <div class="votes">
               <div class="tooltip">
                 <span class="tooltiptext">Total votes</span>
@@ -109,7 +112,7 @@ $(document).ready(function() {
         <header>
           <div class="title">${poll.title}</div>
           <div class="right-corner-buttons">
-            <button class="results-button" data-poll-id="${poll.id}">Results</button>
+            <button class="btn btn-outline-secondary results-button" data-poll-id="${poll.id}">Results</button>
           </div>
         </header>
         <footer>
