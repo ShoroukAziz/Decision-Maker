@@ -198,7 +198,7 @@ $(document).ready(function() {
     e.preventDefault();
     const pollId = $(this).attr('data-poll-id');
 
-    if (confirm('Poll will be marked as complete, press OK to confirm.')) {
+    if (confirm('No turning back! Poll will be marked as complete, press OK to confirm.')) {
       $.ajax(`/polls/${pollId}/complete`, {
         method: 'POST'
       })

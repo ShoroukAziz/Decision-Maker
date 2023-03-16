@@ -21,4 +21,23 @@ main {
   background-color: $background-primary-color;
   color: $lines-color;
   font-family: $primary-font;
+
+  button {
+    background-color: $complete-btn-color;
+    color: $white-color;
+    border-radius: 0.3rem;
+    font-size: 1.2rem;
+    padding: 0.32rem 0.82rem;
+
+    &:hover {
+      background-color: #BD7A75;
+      cursor: pointer;
+    }
+
+    &:active {
+      background-color: #8A4742;
+      box-shadow: 2px 2px 3px #696366;
+    }
+  }
 }
+

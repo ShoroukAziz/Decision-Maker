@@ -144,9 +144,10 @@ router.post('/:id', (req, res) => {
 router.get('/:id/results', (req, res) => {
   queryPolls.getPollDetails(req.params.id)
     .then(pollDetails => {
-
+      console.log(pollDetails)
       if (pollDetails.length === 0) {
-        return res.redirect('/error');
+        res.statusCode = 404;
+        return res.redirect('/error', {code: 404});
       }
 
       queryOptions.getPollOptions(req.params.id)
@@ -157,8 +158,14 @@ router.get('/:id/results', (req, res) => {
             pollTitle: pollDetails[0].title,
             numOfVoters: pollDetails[0].total_voters,
             pollQuestion: pollDetails[0].question,
-            options: converted
+            options: converted,
+            buttonState: ""
           }
+
+          if (pollDetails[0].complete) {
+            pollResultsQuery.buttonState = 'disabled';
+          }
+
           return res.render('polls_results', pollResultsQuery);
         })
         .catch(error => {
@@ -167,17 +174,15 @@ router.get('/:id/results', (req, res) => {
         });
     })
     .catch(error => {
-      res.statusCode = 404;
-      return res.render('error', {code: 404});
+      res.statusCode = 400;
+      return res.render('error', {code: 400});
     });
 });
 
 router.patch('/:id/results', (req, res) => {
-  pollCompleteQueries.setPollToComplete(req.params.id)
+  pollCompleteQueries.completePoll(req.params.id)
     .then(pollId => {
-      return res.redirect('/thank-you');
-      //Suppose to render to index page and get all the polls from the db after updating database by complting the poll.
-      // return res.redirect('/thank_you');
+      return res.redirect('/polls');
     })
     .catch(error => {
       res.statusCode = 404;

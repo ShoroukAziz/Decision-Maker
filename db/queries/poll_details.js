@@ -13,15 +13,17 @@ const getPollDetails = (pollId) => {
     SELECT
       id,
       title,
-      question
+      question,
+      complete
     FROM polls
-    where id = $1 and complete != true
+    where id = $1
   )
 
   SELECT
     id,
     title,
     question,
+    complete,
     total_voters
   FROM poll_details
   JOIN unique_voters
