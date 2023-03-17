@@ -1,5 +1,9 @@
 @import "base";
 
+nav {
+  position: fixed;
+  z-index: 9999;
+}
 
 body {
   background-color: $background-primary-color;
@@ -12,12 +16,13 @@ body {
   flex-direction: column;
   justify-content: space-around;
   font-family: $primary-font;
-  margin-top: 2rem;
+  padding-top: 6rem;
   margin-left: 20rem;
   margin-right: 20rem;
 
   .title {
     font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: 1rem;
   }
 }
@@ -33,7 +38,12 @@ body {
 }
 
 .active-polls-title, .completed-polls-title  {
-  font-size: 1.5rem;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.completed-polls-title {
+  margin-top: -4rem;
 }
 
 .poll {
