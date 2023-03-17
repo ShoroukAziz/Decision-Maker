@@ -19,22 +19,31 @@
 
             <div class="meta">
               <label for="title"> Title</label>
-              <input id="title" name="title" type="text" placeholder="Enter your poll title">
+              <input id="title" name="title" type="text" placeholder="Enter your poll title" value="<%= content.title %>">
             </div>
             <div class="meta">
               <label for="question"> Question</label>
-              <input id="question" name="question" type="text" placeholder="Enter your poll question">
+              <input id="question" name="question" type="text" placeholder="Enter your poll question" value="<%= content.question %>">
             </div>
 
 
             <fieldset>
               <label>Choices</label>
               <div class="choice">
-                <input id="1" name="choice-1" type="text" placeholder="Add a choice">
+                <input id="1" name="choice-1" type="text" placeholder="Add a choice" value="<%= content.answers.one %>">
+                <i class="delete-button fas fa-trash-alt"></i>
+
+              </div>
+              <div class="choice">
+                <input id="2" name="choice-2" type="text" placeholder="Add a choice" value="<%= content.answers.two %>">
                 <i class="delete-button fas fa-trash-alt"></i>
               </div>
               <div class="choice">
-                <input id="2" name="choice-2" type="text" placeholder="Add a choice">
+                <input id="3" name="choice-3" type="text" placeholder="Add a choice" value="<%= content.answers.three %>">
+                <i class="delete-button fas fa-trash-alt"></i>
+              </div>
+              <div class="choice">
+                <input id="4" name="choice-4" type="text" placeholder="Add a choice" value="<%= content.answers.four %>">
                 <i class="delete-button fas fa-trash-alt"></i>
               </div>
 

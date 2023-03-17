@@ -45,6 +45,26 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/new/drinks', (req, res) => {
+  // TODO: replace the hardcoded object with the cookie object
+  res.render('polls_new_drinks', {
+    user:
+    {
+      id: req.session.userId,
+      email: req.session.userEmail,
+      name: req.session.userName
+    }, content: {
+      title: "Drinks",
+      question: "What is your favourite drink?",
+      answers: {
+        one: "Water",
+        two: "Tea",
+        three: "Coffee",
+        four: "Juice"
+      }
+    }
+  });
+});
 
 /*
 * Retrieves The new poll form
